@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
+import Auth from './components/Auth'
 import PostsPage from './components/PostsPage'
 import Profile from './components/Profile'
 import Footer from './components/Footer'
@@ -75,7 +76,8 @@ class App extends Component {
             <div>
                 <Navbar />
                 <Switch>
-                    <Route exact path="/" render={(props) =>  
+                    <Route path="/" render={props => <Auth {...props}/> }/>
+                    <Route exact path="/posts" render={(props) =>  
                                                     <PostsPage 
                                                         {...props} 
                                                         handleSubmit={this.handleSubmit}
