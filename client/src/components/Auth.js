@@ -1,29 +1,14 @@
 import React, { Component } from 'react'
 import AuthForm from './AuthForm'
+import Form from '../shared/Form'
 
 class Auth extends Component {
     constructor(){
         super()
         this.state = {
-            userForm: {
-                username: '',
-                password: ''
-            },
             formToggle: false
         }
     }
-
-    handleChange = e => {
-        const { name, value } = e.target
-        this.setState(prevState => ({
-            userForm: {
-                ...prevState.userForm,
-                [name]: value
-            }
-        }))
-    }
-
-
 
     toggle = () => {
         this.setState(prevState => ({
@@ -46,18 +31,16 @@ class Auth extends Component {
                 }
                 {!this.state.formToggle ? <span onClick={this.toggle}>-Already a Member?</span> : <span onClick={this.toggle}>-New Member?</span>}
                 {!this.state.formToggle 
-                    ? <AuthForm 
-                            handleSubmit={this.handleSubmit}
-                            handleChange={this.handleChange}
-                            username={this.state.username}
-                            password={this.state.password}
-                            btnText="Sign Up"/>
-                    : <AuthForm 
-                            handleSubmit={this.handleSubmit}
-                            handleChange={this.handleChange}
-                            username={this.state.username}
-                            password={this.state.password}
-                            btnText="Login"/>
+                    ? <Form 
+                        inputs={{ username: '', password: '' }}
+                        submit={inputs => props.signUp(inputs)}
+                        render={props => <AuthForm {...props} btnText="Sign Up"/>}
+                        reset/>
+                    : <Form 
+                        inputs={{ username: '', password: '' }}
+                        submit={inputs => props.login(inputs)}
+                        render={props => <AuthForm {...props} btnText="Sign Up"/>}
+                        reset/>
                 }   
             </div>
         )

@@ -25,8 +25,7 @@ class App extends Component {
         })
     }
 
-    signUp = (e, userInfo) => {
-        e.preventDefault()
+    signUp = userInfo => {
         axios.post('/auth/signup', userInfo)
             .then(res => {
                 console.log(res.data)
@@ -36,8 +35,7 @@ class App extends Component {
             })
     }
 
-    login = (e, userInfo) => {
-        e.preventDefault()
+    login = userInfo => {
         axios.post('/auth/login', userInfo)
             .then(res => {
                 console.log(res.data)
