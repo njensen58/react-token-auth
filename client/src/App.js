@@ -98,8 +98,13 @@ class App extends Component {
             <div>
                 <Navbar />
                 <Switch>
-                    <Route exact path="/" render={props => <Auth {...props}/>}/>
-                    <Route path="/posts" render={(props) =>  
+                    <Route exact path="/" render={ props => 
+                                                    <Auth 
+                                                        {...props} 
+                                                        signUp={this.signUp} 
+                                                        login={this.login}/>
+                                                    }/>
+                    <Route path="/posts" render={ props =>  
                                                     <PostsPage 
                                                         {...props} 
                                                         handleSubmit={this.handleSubmit}
@@ -108,8 +113,8 @@ class App extends Component {
                                                         inputs={this.state.addPost}
                                                         posts={this.state.posts}
                                                         formToggle={this.state.formToggle}
-                                                        formToggler={this.formToggler}/>} 
-                                                    />
+                                                        formToggler={this.formToggler}/>
+                                                    }/>
                     <Route 
                         path="/profile" 
                         render={props => <Profile {...props}/> } />
