@@ -19,8 +19,7 @@ const PostsPage = props => {
                         inputs={{ title: '', body: '', imgUrl: '' }}
                         submit={inputs => props.addPost(inputs)}
                         reset
-                    />
-                       
+                    />   
                 </React.Fragment>
             }
 

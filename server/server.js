@@ -5,6 +5,7 @@ const expressJwt = require('express-jwt')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 const postRoutes = require('./routes/post')
+const authRoutes = require('./routes/auth')
 
 app.use(express.json())
 app.use(morgan('dev'))
@@ -28,5 +29,5 @@ app.use('/api/posts', postRoutes)
 
 
 app.listen(5000, () => {
-    console.log("Server is running on Port 5858")
+    console.log("Server is running on Port 5000")
 })
