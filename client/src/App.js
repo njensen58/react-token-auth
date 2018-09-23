@@ -25,6 +25,28 @@ class App extends Component {
         })
     }
 
+    signUp = (e, userInfo) => {
+        e.preventDefault()
+        axios.post('/auth/signup', userInfo)
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+    login = (e, userInfo) => {
+        e.preventDefault()
+        axios.post('/auth/login', userInfo)
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
     handleChange = e => {
         const { name, value } = e.target
         this.setState(prevState => ({
@@ -66,8 +88,13 @@ class App extends Component {
             <div>
                 <Navbar />
                 <Switch>
-                    <Route path="/" render={props => <Auth {...props}/> }/>
-                    <Route exact path="/posts" render={(props) =>  
+                    <Route exact path="/" render={ props => 
+                                                    <Auth 
+                                                        {...props} 
+                                                        signUp={this.signUp} 
+                                                        login={this.login}/>
+                                                    }/>
+                    <Route path="/posts" render={ props =>  
                                                     <PostsPage 
                                                         {...props} 
                                                         addPost={this.addPost}
@@ -75,8 +102,8 @@ class App extends Component {
                                                         inputs={this.state.addPost}
                                                         posts={this.state.posts}
                                                         formToggle={this.state.formToggle}
-                                                        formToggler={this.formToggler}/>} 
-                                                    />
+                                                        formToggler={this.formToggler}/>
+                                                    }/>
                     <Route 
                         path="/profile" 
                         render={props => <Profile {...props}/> } />

@@ -6,6 +6,7 @@ import axios from 'axios'
 
 
 const PostsPage = props => {
+    console.log(props)
     return (
         <div className="posts-page">
             {/* Toggles Form */}

@@ -34,7 +34,16 @@ class Auth extends Component {
     render(){
         return (
             <div>
-                {this.state.formToggle ? <h3>Login</h3> : <h3>Sign Up</h3>}
+                {this.state.formToggle 
+                    ? <div>
+                        <span style={{ backgroundColor: 'blue'}}>Login</span>
+                        <span>Sign Up</span>
+                     </div>
+                    : <div>
+                        <span>Login</span>
+                        <span style={{ backgroundColor: 'blue'}}>Sign Up</span>     
+                    </div>
+                }
                 {!this.state.formToggle ? <span onClick={this.toggle}>-Already a Member?</span> : <span onClick={this.toggle}>-New Member?</span>}
                 {!this.state.formToggle 
                     ? <AuthForm 
