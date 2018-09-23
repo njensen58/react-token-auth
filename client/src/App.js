@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
+import Auth from './components/Auth'
 import PostsPage from './components/PostsPage'
 import Profile from './components/Profile'
 import Footer from './components/Footer'
@@ -27,6 +28,28 @@ class App extends Component {
                 posts: res.data
             })
         })
+    }
+
+    signUp = (e, userInfo) => {
+        e.preventDefault()
+        axios.post('/auth/signup', userInfo)
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+    login = (e, userInfo) => {
+        e.preventDefault()
+        axios.post('/auth/login', userInfo)
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     handleChange = e => {
@@ -75,7 +98,8 @@ class App extends Component {
             <div>
                 <Navbar />
                 <Switch>
-                    <Route exact path="/" render={(props) =>  
+                    <Route exact path="/" render={props => <Auth {...props}/>}/>
+                    <Route path="/posts" render={(props) =>  
                                                     <PostsPage 
                                                         {...props} 
                                                         handleSubmit={this.handleSubmit}
