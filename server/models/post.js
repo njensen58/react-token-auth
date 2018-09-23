@@ -1,24 +1,22 @@
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
-
-const postSchema = new mongoose.Schema({
+const postSchema = new Schema({
     title: String,
     body: String,
     imgUrl: String,
     likes: Number,
     comments: [{
-        comment: {
-            type: String,
-            required: true,
-            timeStamp: Date
-        },
+        type: String,
+        reqired: true,
+        timeStamp: {
+            type: Date,
+            default: Date.now
+        }
     }],
     date: {
-        type: Date
-    },
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        type: Date,
+        default: Date.now
     }
 })
 

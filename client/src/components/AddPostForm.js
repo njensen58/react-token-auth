@@ -1,26 +1,27 @@
 import React from 'react'
 
 const AddPostForm = props => {
+    const { inputs: { title, body, imgUrl}, handleChange, handleSubmit } = props
     return (
-        <form onSubmit={ props.handleSubmit } className="add-post-form">
+        <form onSubmit={ handleSubmit } className="add-post-form">
             <input 
                 type="text" 
-                onChange={ props.handleChange } 
-                value={ props.title } 
+                onChange={ handleChange } 
+                value={ title } 
                 name="title" 
                 placeholder="Title"/>
             <textarea 
                 type="text" 
-                onChange={ props.handleChange } 
-                value={ props.body } 
+                onChange={ handleChange } 
+                value={ body } 
                 name="body"
                 rows={8}
                 cols={12}
                 placeholder="Body"></textarea>
             <input 
                 type="text" 
-                onChange={ props.handleChange } 
-                value={ props.imgUrl } 
+                onChange={ handleChange } 
+                value={ imgUrl } 
                 name="imgUrl" 
                 placeholder="Image url"/>
             <button>Add Post</button>

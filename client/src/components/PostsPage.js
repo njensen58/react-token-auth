@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Post from './Post'
+import Form from '../shared/Form'
 import AddPostForm from './AddPostForm'
 import axios from 'axios'
 
@@ -13,12 +14,12 @@ const PostsPage = props => {
             {/* Add Post Form */}
             {props.formToggle &&
                 <React.Fragment>
-                    <AddPostForm 
-                        title={ props.inputs.title } 
-                        body={ props.inputs.body } 
-                        imgUrl={ props.inputs.imgUrl } 
-                        handleChange={ props.handleChange }
-                        handleSubmit={ props.handleSubmit }/>   
+                    <Form 
+                        render={props => <AddPostForm {...props}/>}
+                        inputs={{ title: '', body: '', imgUrl: '' }}
+                        submit={inputs => props.addPost(inputs)}
+                        reset
+                    />   
                 </React.Fragment>
             }
 
