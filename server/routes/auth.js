@@ -21,7 +21,7 @@ authRouter.post("/signup", (req, res) => {
              // If the user signs up, we might as well give them a token right now
             // So they don't then immediately have to log in as well
             const token = jwt.sign(user.toObject(), process.env.SECRET)
-            return res.status(201).send({success: false, user: user.toObject(), token})
+            return res.status(201).send({success: true, user: user.toObject(), token})
         })
     })
 })

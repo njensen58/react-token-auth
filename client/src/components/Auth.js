@@ -21,24 +21,24 @@ class Auth extends Component {
             <div>
                 {this.state.formToggle 
                     ? <div>
-                        <span style={{ backgroundColor: 'blue'}}>Login</span>
+                        <span style={{ backgroundColor: 'cornflowerblue' }}>Login</span>
                         <span>Sign Up</span>
-                     </div>
+                      </div>
                     : <div>
                         <span>Login</span>
-                        <span style={{ backgroundColor: 'blue'}}>Sign Up</span>     
-                    </div>
+                        <span style={{ backgroundColor: 'cornflowerblue' }}>Sign Up</span>     
+                      </div>
                 }
                 {!this.state.formToggle ? <span onClick={this.toggle}>-Already a Member?</span> : <span onClick={this.toggle}>-New Member?</span>}
                 {!this.state.formToggle 
                     ? <Form 
                         inputs={{ username: '', password: '' }}
-                        submit={inputs => props.signUp(inputs)}
+                        submit={inputs => this.props.signUp(inputs)}
                         render={props => <AuthForm {...props} btnText="Sign Up"/>}
                         reset/>
                     : <Form 
                         inputs={{ username: '', password: '' }}
-                        submit={inputs => props.login(inputs)}
+                        submit={inputs => this.props.login(inputs)}
                         render={props => <AuthForm {...props} btnText="Sign Up"/>}
                         reset/>
                 }   

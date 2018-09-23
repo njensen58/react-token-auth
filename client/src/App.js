@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, withRouter } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Auth from './components/Auth'
 import PostsPage from './components/PostsPage'
@@ -7,28 +7,45 @@ import Profile from './components/Profile'
 import Footer from './components/Footer'
 import axios from 'axios'
 
+let postsAxios = axios.create()
+       
+postsAxios.interceptors.request.use((config) => {
+    const token = localStorage.getItem("token");
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
+})
+
 
 class App extends Component {
     constructor(){
         super()
         this.state = {
             posts: [],
-            formToggle: false
+            formToggle: false,
+            user: {
+                username: '',
+                isAdmin: false,
+                isAuthenticated: false
+            }
         }
     }
 
-    componentDidMount(){
-        axios.get('/posts').then(res => {
+    getData = () => {
+        postsAxios.get('/api/posts').then(res => {
             this.setState({
                 posts: res.data
             })
         })
     }
 
+
     signUp = userInfo => {
         axios.post('/auth/signup', userInfo)
             .then(res => {
-                console.log(res.data)
+                const {token, user} = res.data
+                localStorage.setItem("token", token)
+                localStorage.setItem("user", JSON.stringify(user))
+                this.authenticate(user)
             })
             .catch(err => {
                 console.log(err)
@@ -38,11 +55,31 @@ class App extends Component {
     login = userInfo => {
         axios.post('/auth/login', userInfo)
             .then(res => {
-                console.log(res.data)
+                const {token, user} = res.data
+                localStorage.setItem("token", token)
+                localStorage.setItem("user", JSON.stringify(user))
+                this.authenticate(user)
             })
             .catch(err => {
                 console.log(err)
             })
+    }
+
+    authenticate = user => {
+        this.setState(prevState => ({
+            user: {
+                ...user,
+                isAuthenticated: true
+            }
+        }), () => {
+            this.getData()
+            this.props.history.push('/posts')
+        })
+    }
+
+    logout = () => {
+        localStorage.removeItem("token")
+        localStorage.removeItem("user")
     }
 
     handleChange = e => {
@@ -58,7 +95,7 @@ class App extends Component {
     addPost = newPost => {
         const { title, body, imgUrl } = newPost
         if(title.trim().length > 0 && body.trim().length > 0 && imgUrl.trim().length > 0){
-            axios.post('/posts', newPost).then(res => {
+            postsAxios.post('/api/posts', newPost).then(res => {
                 this.setState(prevState => ({
                     posts: [...prevState.posts, res.data],
                     formToggle: false,
@@ -68,7 +105,7 @@ class App extends Component {
     }
 
     handleDelete = id => {
-        axios.delete(`/posts/${id}`).then(res => {
+        postsAxios.delete(`/api/posts/${id}`).then(res => {
             this.setState(prevState => ({
                 posts: prevState.posts.filter(post => post._id !== id)
             }))
@@ -82,9 +119,10 @@ class App extends Component {
     }
 
     render(){
+
         return (
             <div>
-                <Navbar />
+                <Navbar logout={this.logout} authenticated={this.state.user.isAuthenticated}/>
                 <Switch>
                     <Route exact path="/" render={ props => 
                                                     <Auth 
@@ -112,4 +150,4 @@ class App extends Component {
     }
 }
 
-export default App
+export default withRouter(App)

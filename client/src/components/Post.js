@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 const Post = props =>  {
     const { handleDelete, _id, imgUrl, title, body } = props
