@@ -39,7 +39,8 @@ class App extends Component {
         if(title.trim().length > 0 && body.trim().length > 0 && imgUrl.trim().length > 0){
             axios.post('/posts', newPost).then(res => {
                 this.setState(prevState => ({
-                    posts: [...prevState.posts, res.data]
+                    posts: [...prevState.posts, res.data],
+                    formToggle: false,
                 }))
             })
         }

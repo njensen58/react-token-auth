@@ -7,14 +7,16 @@ const postSchema = new mongoose.Schema({
     imgUrl: String,
     likes: Number,
     comments: [{
-        comment: {
-            type: String,
-            required: true,
-            timeStamp: Date
-        },
+        type: String,
+        reqired: true,
+        timeStamp: {
+            type: Date,
+            default: Date.now
+        }
     }],
     date: {
-        type: Date
+        type: Date,
+        default: Date.now
     }
 })
 
