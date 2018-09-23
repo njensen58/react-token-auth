@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
-
-const postSchema = new mongoose.Schema({
+const postSchema = new Schema({
     title: String,
     body: String,
     imgUrl: String,
@@ -17,8 +17,9 @@ const postSchema = new mongoose.Schema({
         type: Date
     },
     user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true
     }
 })
 
