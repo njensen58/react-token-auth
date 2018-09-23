@@ -2,7 +2,6 @@ const express = require('express')
 const app = express()
 const morgan = require('morgan')
 const mongoose = require('mongoose')
-const authRoutes = require('./routes/auth')
 const postRoutes = require('./routes/post')
 
 app.use(express.json())
@@ -13,7 +12,6 @@ mongoose.connect('mongodb://localhost:27017/react-auth', () => {
 }).catch(err => console.log(err))
 
 
-app.use('/auth', authRoutes)
 
 app.use('/posts', postRoutes)
 
