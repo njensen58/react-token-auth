@@ -80,6 +80,15 @@ class App extends Component {
     logout = () => {
         localStorage.removeItem("token")
         localStorage.removeItem("user")
+        this.setState({
+            user: {
+                username: '',
+                isAdmin: false,
+                isAuthenticated: false
+            }
+        }, () => {
+            this.props.history.push('/')
+        })
     }
 
     handleChange = e => {
@@ -97,6 +106,7 @@ class App extends Component {
         if(title.trim().length > 0 && body.trim().length > 0 && imgUrl.trim().length > 0){
             postsAxios.post('/api/posts', newPost).then(res => {
                 this.setState(prevState => ({
+                    ...prevState,
                     posts: [...prevState.posts, res.data],
                     formToggle: false,
                 }))
@@ -119,7 +129,7 @@ class App extends Component {
     }
 
     render(){
-
+        console.log(this.state)
         return (
             <div>
                 <Navbar logout={this.logout} authenticated={this.state.user.isAuthenticated}/>
