@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AuthForm from './AuthForm'
+import Form from '../shared/Form'
 
 class Auth extends Component {
     constructor(){
@@ -23,7 +24,9 @@ class Auth extends Component {
         }))
     }
 
-
+    handleSubmit = e => {
+        
+    }
 
     toggle = () => {
         this.setState(prevState => ({
@@ -37,18 +40,16 @@ class Auth extends Component {
                 {this.state.formToggle ? <h3>Login</h3> : <h3>Sign Up</h3>}
                 {!this.state.formToggle ? <span onClick={this.toggle}>-Already a Member?</span> : <span onClick={this.toggle}>-New Member?</span>}
                 {!this.state.formToggle 
-                    ? <AuthForm 
-                            handleSubmit={this.handleSubmit}
-                            handleChange={this.handleChange}
-                            username={this.state.username}
-                            password={this.state.password}
-                            btnText="Sign Up"/>
-                    : <AuthForm 
-                            handleSubmit={this.handleSubmit}
-                            handleChange={this.handleChange}
-                            username={this.state.username}
-                            password={this.state.password}
-                            btnText="Login"/>
+                    ? <Form 
+                        inputs={{ username: '', password: '' }}
+                        submit={inputs => this.handleSubmit}
+                        render={props => <AuthForm {...props} btnText="Sign Up"/>}
+                        reset/>
+                    : <Form 
+                        inputs={{ username: '', password: '' }}
+                        submit={inputs => this.handleSubmit}
+                        render={props => <AuthForm {...props} btnText="Login"/>}
+                        reset/>
                 }   
             </div>
         )
