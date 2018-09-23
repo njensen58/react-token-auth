@@ -7,6 +7,7 @@ const postRoutes = require('./routes/post')
 app.use(express.json())
 app.use(morgan('dev'))
 
+// Connect to DB
 mongoose.connect('mongodb://localhost:27017/react-auth', {useNewUrlParser: true}, () => {
     console.log('connected to the db')
 }).catch(err => console.log(err))
