@@ -1,0 +1,150 @@
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    font-family: sans-serif;
+    font-weight: lighter;
+}
+
+*:visited {
+    color: #ddd9;
+}
+
+.nav {
+    height: 30px;
+    background-color: #3339;
+    color: #ddd9;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.posts-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.posts-page button:nth-child(1) {
+    padding: 3px;
+    border-radius: 2px;
+    background-color: darkslategrey;
+    color: lightblue;
+    border: none;
+    z-index: 3;
+    transition: .2s;
+    margin-top: 5px;
+}
+
+.posts-page button:nth-child(1):hover {
+    background-color: lightblue;
+    color: darkslategrey;
+    cursor: pointer;
+}
+
+.posts-page button:nth-child(1):active {
+    background-color: darkslateblue;
+    color: lightblue;
+}
+
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px;
+}
+
+.add-post-form {
+    position: absolute;
+    height: 250px;
+    width: 350px;
+    border: 1px solid #ddd9;
+    display: flex;
+    flex-direction: column;
+    background-color: #2229;
+    z-index: 2;
+    padding: 10px;
+    border-radius: 3px;
+    margin-top: 10px;
+    align-items: center;
+}
+
+.add-post-form input {
+    margin: 10px;
+    padding: 3px;
+    width: 250px;
+}
+
+.add-post-form textarea {
+    resize: none;
+    width: 250px;
+    padding: 3px;
+}
+
+.add-post-form button {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.page-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(20, 19, 19, 0.726);
+    z-index: 1;
+    position: absolute;
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: 20px;
+    align-items: center;
+}
+
+.post h3 {
+    font-size: 12px;
+    padding: 3px;
+}
+
+.post p {
+    font-size: 10px;
+    padding: 3px;
+    width: 300px;
+}
+
+.post button {
+    position: absolute;
+    right: 0;
+    padding: 5px 8px;
+    border-radius: 2px;
+    background-color: #3336;
+    border: none;
+    color: #ddd9;
+}
+
+.post button:active {
+    background-color: #ddd9;
+    color: black;
+} 
+
+.post button:hover {
+    cursor: pointer;
+}
+
+.post div {
+    height: 300px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 300px;
+}
+
+footer {
+    height: 20px;
+    background-color: #3339;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ddd9;
+}
