@@ -12,12 +12,7 @@ class App extends Component {
         super()
         this.state = {
             posts: [],
-            formToggle: false,
-            addPost: {
-                title: '',
-                body: '',
-                imgUrl: ''
-            }
+            formToggle: false
         }
     }
 
@@ -39,18 +34,12 @@ class App extends Component {
         }))
     }
 
-    handleSubmit = e => {
-        e.preventDefault()
-        const { title, body, imgUrl } = this.state.addPost
+    addPost = newPost => {
+        const { title, body, imgUrl } = newPost
         if(title.trim().length > 0 && body.trim().length > 0 && imgUrl.trim().length > 0){
-            axios.post('/posts', this.state.addPost).then(res => {
+            axios.post('/posts', newPost).then(res => {
                 this.setState(prevState => ({
-                    posts: [...prevState.posts, res.data],
-                    addPost: {
-                        title: '',
-                        body: '',
-                        imgUrl: ''
-                    }
+                    posts: [...prevState.posts, res.data]
                 }))
             })
         }
@@ -78,8 +67,7 @@ class App extends Component {
                     <Route exact path="/" render={(props) =>  
                                                     <PostsPage 
                                                         {...props} 
-                                                        handleSubmit={this.handleSubmit}
-                                                        handleChange={this.handleChange}
+                                                        addPost={this.addPost}
                                                         handleDelete={this.handleDelete}
                                                         inputs={this.state.addPost}
                                                         posts={this.state.posts}
