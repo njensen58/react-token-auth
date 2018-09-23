@@ -1,7 +1,4 @@
 node_modules
-<<<<<<< HEAD
-.env
-=======
 .env
 
 .DS_Store
@@ -9,4 +6,3 @@ node_modules
 .idea/
 .vscode/
 *.orig
->>>>>>> a078425ae0e6b74266d7ab933c58bdba52993493
