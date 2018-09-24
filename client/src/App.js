@@ -25,19 +25,15 @@ class App extends Component {
             user: {
                 username: '',
                 isAdmin: false,
-                isAuthenticated: false
-            }
+                _id: ''
+            },
+            authErrCode: {
+                signup: '',
+                login: ''
+            },
+            isAuthenticated: false
         }
     }
-
-    getData = () => {
-        postsAxios.get('/api/posts').then(res => {
-            this.setState({
-                posts: res.data
-            })
-        })
-    }
-
 
     signUp = userInfo => {
         axios.post('/auth/signup', userInfo)
@@ -48,7 +44,7 @@ class App extends Component {
                 this.authenticate(user)
             })
             .catch(err => {
-                console.log(err)
+                this.authError("signup", err.response.status)
             })
     }
 
@@ -62,15 +58,16 @@ class App extends Component {
             })
             .catch(err => {
                 console.log(err)
+                this.authError("login", err.response.status)
             })
     }
 
     authenticate = user => {
         this.setState(prevState => ({
             user: {
-                ...user,
-                isAuthenticated: true
-            }
+                ...user
+            },
+            isAuthenticated: true
         }), () => {
             this.getData()
             this.props.history.push('/posts')
@@ -84,10 +81,28 @@ class App extends Component {
             user: {
                 username: '',
                 isAdmin: false,
-                isAuthenticated: false
-            }
+                _id: ''
+            },
+            isAuthenticated: false
         }, () => {
             this.props.history.push('/')
+        })
+    }
+
+    authError = (key, errCode) => {
+        this.setState(prevState => ({
+            authErrCode: {
+                ...prevState.authErrCode,
+                [key]: errCode
+            }
+        }))
+    }
+
+    getData = () => {
+        postsAxios.get('/api/posts').then(res => {
+            this.setState({
+                posts: res.data
+            })
         })
     }
 
@@ -129,15 +144,17 @@ class App extends Component {
     }
 
     render(){
+        console.log(this.state)
         return (
             <div>
-                <Navbar logout={this.logout} authenticated={this.state.user.isAuthenticated}/>
+                { this.state.isAuthenticated && <Navbar logout={this.logout} authenticated={this.state.isAuthenticated}/>}
                 <Switch>
                     <Route exact path="/" render={ props => 
                                                     <Auth 
                                                         {...props} 
                                                         signUp={this.signUp} 
-                                                        login={this.login}/>
+                                                        login={this.login}
+                                                        authErrCode={this.state.authErrCode}/>
                                                     }/>
                     <Route path="/posts" render={ props =>  
                                                     <PostsPage 
@@ -149,9 +166,11 @@ class App extends Component {
                                                         formToggle={this.state.formToggle}
                                                         formToggler={this.formToggler}/>
                                                     }/>
-                    <Route 
-                        path="/profile" 
-                        render={props => <Profile {...props}/> } />
+                    <Route path="/profile" render={ props => 
+                                                    <Profile 
+                                                        {...props}
+                                                        user={this.state.user}/> 
+                                                    }/>
                 </Switch> 
                 <Footer />
             </div>
