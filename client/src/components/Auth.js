@@ -25,7 +25,7 @@ class Auth extends Component {
     }
 
     handleSubmit = e => {
-        
+        // need to login or signup depending on the user's choice
     }
 
     toggle = () => {
