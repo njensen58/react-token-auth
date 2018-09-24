@@ -129,7 +129,6 @@ class App extends Component {
     }
 
     render(){
-        console.log(this.state)
         return (
             <div>
                 <Navbar logout={this.logout} authenticated={this.state.user.isAuthenticated}/>
