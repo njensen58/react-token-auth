@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Switch, Route, withRouter } from 'react-router-dom'
+import { Switch, Route, withRouter, Redirect } from 'react-router-dom'
+import ProtectedRoute from './components/ProtectedRoute'
 import Navbar from './components/Navbar'
 import Auth from './components/Auth'
 import PostsPage from './components/PostsPage'
@@ -70,7 +71,7 @@ class App extends Component {
             isAuthenticated: true
         }), () => {
             this.getData()
-            this.props.history.push('/posts')
+            // this.props.history.push('/posts')
         })
     }
 
@@ -85,7 +86,7 @@ class App extends Component {
             },
             isAuthenticated: false
         }, () => {
-            this.props.history.push('/')
+            // this.props.history.push('/')
         })
     }
 
@@ -144,19 +145,21 @@ class App extends Component {
     }
 
     render(){
-        console.log(this.state)
+        const { isAuthenticated } = this.state
         return (
             <div>
-                { this.state.isAuthenticated && <Navbar logout={this.logout} authenticated={this.state.isAuthenticated}/>}
+                {/* Only show the navbar once the user is authenticated */}
+                { this.state.isAuthenticated && <Navbar logout={this.logout}/> }
                 <Switch>
-                    <Route exact path="/" render={ props => 
-                                                    <Auth 
-                                                        {...props} 
-                                                        signUp={this.signUp} 
-                                                        login={this.login}
-                                                        authErrCode={this.state.authErrCode}/>
-                                                    }/>
-                    <Route path="/posts" render={ props =>  
+                    <Route exact path="/" render={ props => isAuthenticated 
+                                                    ?   <Redirect to="/posts"/>
+                                                    :   <Auth 
+                                                            {...props} 
+                                                            signUp={this.signUp} 
+                                                            login={this.login}
+                                                            authErrCode={this.state.authErrCode}/>
+                                                        }/>
+                    <Route path="/posts" componentName={PostsPage} render={ props =>  
                                                     <PostsPage 
                                                         {...props} 
                                                         addPost={this.addPost}
@@ -166,7 +169,7 @@ class App extends Component {
                                                         formToggle={this.state.formToggle}
                                                         formToggler={this.formToggler}/>
                                                     }/>
-                    <Route path="/profile" render={ props => 
+                    <Route path="/profile" componentName={Profile} render={ props => 
                                                     <Profile 
                                                         {...props}
                                                         user={this.state.user}/> 

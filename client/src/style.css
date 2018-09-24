@@ -140,6 +140,11 @@
     width: 300px;
 }
 
+.auth p {
+    color: firebrick;
+    padding: 3px;
+}
+
 footer {
     height: 20px;
     background-color: #3339;

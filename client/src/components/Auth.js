@@ -33,7 +33,7 @@ class Auth extends Component {
         }
 
         return (
-            <div>
+            <div className="auth">
                 {this.state.formToggle 
                     ? <div>
                         <span style={{ backgroundColor: 'cornflowerblue' }}>Login</span>
