@@ -65,7 +65,7 @@ class App extends Component {
             <div>
                 <Navbar />
                 <Switch>
-                    <Route exact path="/" render={(props) =>  
+                    <Route exact path="/" render={ props =>  
                                                     <PostsPage 
                                                         {...props} 
                                                         addPost={this.addPost}
@@ -77,7 +77,7 @@ class App extends Component {
                                                     />
                     <Route 
                         path="/profile" 
-                        render={props => <Profile {...props}/> } />
+                        render={ props => <Profile {...props}/> } />
                 </Switch> 
                 <Footer />
             </div>
