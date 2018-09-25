@@ -140,6 +140,14 @@
     width: 300px;
 }
 
+.auth-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+
 footer {
     height: 20px;
     background-color: #3339;
