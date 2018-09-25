@@ -25,7 +25,7 @@ class Auth extends Component {
     }
 
     handleSubmit = e => {
-        
+        // need to login or signup depending on the user's choice
     }
 
     toggle = () => {
@@ -36,7 +36,7 @@ class Auth extends Component {
 
     render(){
         return (
-            <div>
+            <div className="auth-page">
                 {this.state.formToggle ? <h3>Login</h3> : <h3>Sign Up</h3>}
                 {!this.state.formToggle ? <span onClick={this.toggle}>-Already a Member?</span> : <span onClick={this.toggle}>-New Member?</span>}
                 {!this.state.formToggle 
