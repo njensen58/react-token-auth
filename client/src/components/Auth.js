@@ -18,7 +18,7 @@ class Auth extends Component {
 
     render(){
         return (
-            <div>
+            <div className="auth-page">
                 {this.state.formToggle 
                     ? <div>
                         <span style={{ backgroundColor: 'cornflowerblue' }}>Login</span>
