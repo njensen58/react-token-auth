@@ -23,6 +23,7 @@ class App extends Component {
         this.state = {
             posts: [],
             formToggle: false,
+            loading: true,
             user: {
                 username: '',
                 isAdmin: false,
@@ -34,6 +35,10 @@ class App extends Component {
             },
             isAuthenticated: false
         }
+    }
+
+    componentDidMount(){
+        this.verify()
     }
 
     signUp = userInfo => {
@@ -68,7 +73,8 @@ class App extends Component {
             user: {
                 ...user
             },
-            isAuthenticated: true
+            isAuthenticated: true,
+            loading: false
         }), () => {
             this.getData()
         })
@@ -84,9 +90,8 @@ class App extends Component {
                 isAdmin: false,
                 _id: ''
             },
-            isAuthenticated: false
-        }, () => {
-            // this.props.history.push('/')
+            isAuthenticated: false,
+            loading: false
         })
     }
 
@@ -94,9 +99,21 @@ class App extends Component {
         this.setState(prevState => ({
             authErrCode: {
                 ...prevState.authErrCode,
-                [key]: errCode
+                [key]: errCode,
+                loading: false
             }
         }))
+    }
+
+    verify = () => {
+        postsAxios.get('/api/profile')
+            .then(res => {
+                const { user } = res.data
+                this.authenticate(user)
+            })
+            .catch(err => {
+                this.authError("verify", err.status)
+            })
     }
 
     getData = () => {
@@ -145,7 +162,7 @@ class App extends Component {
     }
 
     render(){
-        const { isAuthenticated } = this.state
+        const { isAuthenticated, loading } = this.state
         return (
             <div>
                 {/* Only show the navbar once the user is authenticated */}

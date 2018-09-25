@@ -6,6 +6,7 @@ const morgan = require('morgan')
 const mongoose = require('mongoose')
 const postRoutes = require('./routes/post')
 const authRoutes = require('./routes/auth')
+const profileRoutes = require('./routes/profile')
 
 app.use(express.json())
 app.use(morgan('dev'))
@@ -24,7 +25,8 @@ app.use("/api", expressJwt({secret: process.env.SECRET}))
 
 app.use('/auth', authRoutes)
 app.use('/api/posts', postRoutes)
-
+// Added profile route to be able to re-verify a user when they refresh on a different page.
+app.use('/api/profile', profileRoutes)
 
 
 

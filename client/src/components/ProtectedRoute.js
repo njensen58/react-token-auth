@@ -6,9 +6,9 @@ class ProtectedRoute extends Component {
         const { isAuthenticated, redirectTo, path, neededProps } = this.props
         const Component = this.props.component
         return (
-            !isAuthenticated ?
-                <Redirect to={redirectTo}/> :
-                this.props.render()
+            !isAuthenticated 
+                ? <Redirect to={redirectTo}/> 
+                : this.props.render()
         )
     }
 }
