@@ -37,6 +37,8 @@ class App extends Component {
         }
     }
 
+    /////////////////////////////////
+    // USER AUTHENTICATION METHODS //
     componentDidMount(){
         this.verify()
     }
@@ -115,7 +117,11 @@ class App extends Component {
                 this.authError("verify", err.status)
             })
     }
+    /// END USER AUTHENTICATION METHODS //
 
+
+    //////////////////////////////
+    // USER INTERACTION METHODS //
     getData = () => {
         postsAxios.get('/api/posts').then(res => {
             this.setState({
@@ -160,7 +166,9 @@ class App extends Component {
             formToggle: !prevState.formToggle
         }))
     }
+    // END USER INTERACTION METHODS //
 
+    
     render(){
         const { isAuthenticated, loading } = this.state
         return (
