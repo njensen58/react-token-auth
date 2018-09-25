@@ -160,19 +160,24 @@ class App extends Component {
                                                             authErrCode={this.state.authErrCode}/>}/>
                     <ProtectedRoute 
                                 path="/posts" 
+                                redirectTo="/"
                                 isAuthenticated={ isAuthenticated } 
-                                component={PostsPage} 
-                                neededProps={{ 
-                                        addPost: this.addPost, 
-                                        handleDelete: this.handleDelete,
-                                        posts: this.state.posts, 
-                                        formToggle: this.state.formToggle, 
-                                        formToggler: this.formToggler}}/>
+                                render={() => 
+                                    <PostsPage 
+                                        {...this.props}
+                                        addPost={this.addPost}
+                                        posts={this.state.posts}
+                                        handleDelete={this.handleDelete}
+                                        formToggler={this.formToggler}
+                                        formToggle={this.state.formToggle}/>} 
+                                />
                     <ProtectedRoute 
                                 path="/profile" 
                                 isAuthenticated={ isAuthenticated }
-                                component={Profile} 
-                                neededProps={{ user: this.state.user }}/>
+                                redirectTo="/"
+                                render={() => 
+                                    <Profile user={this.state.user}/>
+                                }/>
                 </Switch> 
                 <Footer />
             </div>
