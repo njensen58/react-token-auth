@@ -71,8 +71,8 @@ class App extends Component {
             isAuthenticated: true
         }), () => {
             this.getData()
-            // this.props.history.push('/posts')
         })
+        
     }
 
     logout = () => {
@@ -157,23 +157,22 @@ class App extends Component {
                                                             {...props} 
                                                             signUp={this.signUp} 
                                                             login={this.login}
-                                                            authErrCode={this.state.authErrCode}/>
-                                                        }/>
-                    <Route path="/posts" componentName={PostsPage} render={ props =>  
-                                                    <PostsPage 
-                                                        {...props} 
-                                                        addPost={this.addPost}
-                                                        handleDelete={this.handleDelete}
-                                                        inputs={this.state.addPost}
-                                                        posts={this.state.posts}
-                                                        formToggle={this.state.formToggle}
-                                                        formToggler={this.formToggler}/>
-                                                    }/>
-                    <Route path="/profile" componentName={Profile} render={ props => 
-                                                    <Profile 
-                                                        {...props}
-                                                        user={this.state.user}/> 
-                                                    }/>
+                                                            authErrCode={this.state.authErrCode}/>}/>
+                    <ProtectedRoute 
+                                path="/posts" 
+                                isAuthenticated={ isAuthenticated } 
+                                component={PostsPage} 
+                                neededProps={{ 
+                                        addPost: this.addPost, 
+                                        handleDelete: this.handleDelete,
+                                        posts: this.state.posts, 
+                                        formToggle: this.state.formToggle, 
+                                        formToggler: this.formToggler}}/>
+                    <ProtectedRoute 
+                                path="/profile" 
+                                isAuthenticated={ isAuthenticated }
+                                component={Profile} 
+                                neededProps={{ user: this.state.user }}/>
                 </Switch> 
                 <Footer />
             </div>
