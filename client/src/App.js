@@ -9,7 +9,8 @@ import Footer from './components/Footer'
 import axios from 'axios'
 
 let postsAxios = axios.create()
-       
+
+// Used to add the users auth token to headers of all requests requiring the token
 postsAxios.interceptors.request.use((config) => {
     const token = localStorage.getItem("token");
     config.headers.Authorization = `Bearer ${token}`;
@@ -39,8 +40,8 @@ class App extends Component {
 
     /////////////////////////////////
     // USER AUTHENTICATION METHODS //
-    componentDidMount(){
-        this.verify()
+    componentDidMount(){ // Verify the user everytime the user refreshes/causes the component to remount
+        this.verify()    // This is so while the user navigates around the site, they remain logged in
     }
 
     signUp = userInfo => {
@@ -101,9 +102,9 @@ class App extends Component {
         this.setState(prevState => ({
             authErrCode: {
                 ...prevState.authErrCode,
-                [key]: errCode,
-                loading: false
-            }
+                [key]: errCode
+            },
+            loading: false
         }))
     }
 
@@ -175,6 +176,7 @@ class App extends Component {
             <div>
                 {/* Only show the navbar once the user is authenticated */}
                 { this.state.isAuthenticated && <Navbar logout={this.logout}/> }
+                { loading ? <div>...Loading</div> :
                 <Switch>
                     <Route exact path="/" render={ props => isAuthenticated 
                                                     ?   <Redirect to="/posts"/>
@@ -189,7 +191,7 @@ class App extends Component {
                                 isAuthenticated={ isAuthenticated } 
                                 render={() => 
                                     <PostsPage 
-                                        {...this.props}
+                                        {...this.props} // Sends the history, match, and location props from react-router-dom
                                         addPost={this.addPost}
                                         posts={this.state.posts}
                                         handleDelete={this.handleDelete}
@@ -201,9 +203,10 @@ class App extends Component {
                                 isAuthenticated={ isAuthenticated }
                                 redirectTo="/"
                                 render={() => 
-                                    <Profile user={this.state.user}/>
+                                    <Profile user={this.state.user} {...this.props}/>
                                 }/>
                 </Switch> 
+                }
                 <Footer />
             </div>
         )

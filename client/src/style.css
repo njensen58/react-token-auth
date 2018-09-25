@@ -140,9 +140,17 @@
     width: 300px;
 }
 
-.auth p {
+.auth-page p {
     color: firebrick;
     padding: 3px;
+}
+
+.auth-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
 }
 
 footer {

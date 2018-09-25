@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Profile = props => {
+    console.log(props)
     const { username } = props.user
     return (
         <div>
