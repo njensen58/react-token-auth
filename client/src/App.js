@@ -80,6 +80,7 @@ class App extends Component {
         localStorage.removeItem("token")
         localStorage.removeItem("user")
         this.setState({
+            todos: [],
             user: {
                 username: '',
                 isAdmin: false           
