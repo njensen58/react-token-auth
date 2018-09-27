@@ -24,9 +24,9 @@ class App extends Component {
             formToggle: false,
             user: {
                 username: '',
-                isAdmin: false,
-                isAuthenticated: false
-            }
+                isAdmin: false
+            },
+            isAuthenticated: false
         }
     }
 
@@ -68,12 +68,11 @@ class App extends Component {
     authenticate = user => {
         this.setState(prevState => ({
             user: {
-                ...user,
-                isAuthenticated: true
-            }
+                ...user
+            },
+            isAuthenticated: true
         }), () => {
-            this.getData()
-            this.props.history.push('/posts')
+            this.getData() // Client still has to manually navigate after authentication
         })
     }
 
@@ -83,11 +82,11 @@ class App extends Component {
         this.setState({
             user: {
                 username: '',
-                isAdmin: false,
-                isAuthenticated: false
-            }
+                isAdmin: false
+            },
+            isAuthenticated: false
         }, () => {
-            this.props.history.push('/')
+            this.props.history.push('/') // Temporary Fix
         })
     }
 
@@ -131,7 +130,7 @@ class App extends Component {
     render(){
         return (
             <div>
-                <Navbar logout={this.logout} authenticated={this.state.user.isAuthenticated}/>
+                <Navbar logout={this.logout} authenticated={this.state.isAuthenticated}/>
                 <Switch>
                     <Route exact path="/" render={ props => 
                                                     <Auth 
