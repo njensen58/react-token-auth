@@ -6,13 +6,13 @@ const AuthForm = props => {
             <input 
                 type="text" 
                 onChange={props.handleChange} 
-                value={props.username} 
+                value={props.inputs.username} 
                 name="username" 
                 placeholder="Username"/>
             <input 
                 type="text" 
                 onChange={props.handleChange} 
-                value={props.password} 
+                value={props.inputs.password} 
                 name="password" 
                 placeholder="Username"/>
             <button>{props.btnText}</button>
