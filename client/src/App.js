@@ -25,16 +25,6 @@ class App extends Component {
         })
     }
 
-    handleChange = e => {
-        const { name, value } = e.target
-        this.setState(prevState => ({
-            addPost: {
-                ...prevState.addPost,
-                [name]: value
-            }
-        }))
-    }
-
     addPost = newPost => {
         const { title, body, imgUrl } = newPost
         if(title.trim().length > 0 && body.trim().length > 0 && imgUrl.trim().length > 0){
