@@ -6,22 +6,8 @@ class Auth extends Component {
     constructor(){
         super()
         this.state = {
-            userForm: {
-                username: '',
-                password: ''
-            },
             formToggle: false
         }
-    }
-
-    handleChange = e => {
-        const { name, value } = e.target
-        this.setState(prevState => ({
-            userForm: {
-                ...prevState.userForm,
-                [name]: value
-            }
-        }))
     }
 
     handleSubmit = e => {
