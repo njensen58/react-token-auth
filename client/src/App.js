@@ -56,7 +56,7 @@ class App extends Component {
             <div>
                 <Navbar />
                 <Switch>
-                    <Route path="/" render={props => <Auth {...props}/> }/>
+                    <Route exact path="/" render={props => <Auth {...props}/> }/>
                     <Route exact path="/posts" render={(props) =>  
                                                     <PostsPage 
                                                         {...props} 
