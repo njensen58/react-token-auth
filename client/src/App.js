@@ -84,7 +84,8 @@ class App extends Component {
                 username: '',
                 isAdmin: false
             },
-            isAuthenticated: false
+            isAuthenticated: false,
+            posts: []
         }, () => {
             this.props.history.push('/') // Temporary Fix
         })
