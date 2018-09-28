@@ -1,11 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Post from './Post'
 import Form from '../shared/Form'
 import AddPostForm from './AddPostForm'
-import axios from 'axios'
+
 
 
 const PostsPage = props => {
+    console.log(props)
     return (
         <div className="posts-page">
             {/* Toggles Form */}

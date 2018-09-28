@@ -10,6 +10,23 @@ class Auth extends Component {
         }
     }
 
+<<<<<<< HEAD
+=======
+    handleChange = e => {
+        const { name, value } = e.target
+        this.setState(prevState => ({
+            userForm: {
+                ...prevState.userForm,
+                [name]: value
+            }
+        }))
+    }
+
+    handleSubmit = e => {
+        // need to login or signup depending on the user's choice
+    }
+
+>>>>>>> master
     toggle = () => {
         this.setState(prevState => ({
             formToggle: !prevState.formToggle
@@ -34,6 +51,7 @@ class Auth extends Component {
 
         return (
             <div className="auth-page">
+<<<<<<< HEAD
                 {this.state.formToggle 
                     ? <div>
                         <span style={{ backgroundColor: 'cornflowerblue' }}>Login</span>
@@ -44,16 +62,27 @@ class Auth extends Component {
                         <span style={{ backgroundColor: 'cornflowerblue' }}>Sign Up</span>     
                       </div>
                 }
+=======
+                {this.state.formToggle ? <h3>Login</h3> : <h3>Sign Up</h3>}
+>>>>>>> master
                 {!this.state.formToggle ? <span onClick={this.toggle}>-Already a Member?</span> : <span onClick={this.toggle}>-New Member?</span>}
                 {!this.state.formToggle 
                     ? <Form 
                         inputs={{ username: '', password: '' }}
+<<<<<<< HEAD
                         submit={inputs => this.props.signUp(inputs)}
+=======
+                        submit={inputs => this.handleSubmit}
+>>>>>>> master
                         render={props => <AuthForm {...props} btnText="Sign Up"/>}
                         reset/>
                     : <Form 
                         inputs={{ username: '', password: '' }}
+<<<<<<< HEAD
                         submit={inputs => this.props.login(inputs)}
+=======
+                        submit={inputs => this.handleSubmit}
+>>>>>>> master
                         render={props => <AuthForm {...props} btnText="Login"/>}
                         reset/>
                 }   

@@ -140,11 +140,14 @@
     width: 300px;
 }
 
+<<<<<<< HEAD
 .auth-page p {
     color: firebrick;
     padding: 3px;
 }
 
+=======
+>>>>>>> master
 .auth-page {
     display: flex;
     flex-direction: column;

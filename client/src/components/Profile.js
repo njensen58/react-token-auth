@@ -1,9 +1,11 @@
 import React from 'react';
 
-const Profile = () => {
+const Profile = props => {
+    console.log(props)
+    const { username } = props.user
     return (
         <div>
-            <h3>Posts: {}</h3>
+            <h3>Welcome {username[0].toUpperCase() + username.slice(1)}!</h3>
         </div>
     );
 };
