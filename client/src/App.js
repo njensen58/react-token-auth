@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom'
-import ProtectedRoute from './components/ProtectedRoute'
+import ProtectedRoute from './shared/ProtectedRoute'
 import Navbar from './components/Navbar'
 import Auth from './components/Auth'
 import PostsPage from './components/PostsPage'
@@ -203,7 +203,9 @@ class App extends Component {
                                 isAuthenticated={ isAuthenticated }
                                 redirectTo="/"
                                 render={() => 
-                                    <Profile user={this.state.user} {...this.props}/>
+                                    <Profile 
+                                        user={this.state.user} 
+                                        {...this.props}/>
                                 }/>
                 </Switch> 
                 }
