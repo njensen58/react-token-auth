@@ -39,7 +39,7 @@ class Auth extends Component {
                     : <Form 
                         inputs={{ username: '', password: '' }}
                         submit={inputs => this.props.login(inputs)}
-                        render={props => <AuthForm {...props} btnText="Sign Up"/>}
+                        render={props => <AuthForm {...props} btnText="Login"/>}
                         reset/>
                 }   
             </div>
