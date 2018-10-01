@@ -177,37 +177,37 @@ class App extends Component {
                 {/* Only show the navbar once the user is authenticated */}
                 { this.state.isAuthenticated && <Navbar logout={this.logout}/> }
                 { loading ? <div>...Loading</div> :
-                <Switch>
-                    <Route exact path="/" render={ props => isAuthenticated 
-                                                    ?   <Redirect to="/posts"/>
-                                                    :   <Auth 
-                                                            {...props} 
-                                                            signUp={this.signUp} 
-                                                            login={this.login}
-                                                            authErrCode={this.state.authErrCode}/>}/>
-                    <ProtectedRoute 
-                                path="/posts" 
-                                redirectTo="/"
-                                isAuthenticated={ isAuthenticated } 
-                                render={() => 
-                                    <PostsPage 
-                                        {...this.props} // Sends the history, match, and location props from react-router-dom
-                                        addPost={this.addPost}
-                                        posts={this.state.posts}
-                                        handleDelete={this.handleDelete}
-                                        formToggler={this.formToggler}
-                                        formToggle={this.state.formToggle}/>} 
-                                />
-                    <ProtectedRoute 
-                                path="/profile" 
-                                isAuthenticated={ isAuthenticated }
-                                redirectTo="/"
-                                render={() => 
-                                    <Profile 
-                                        user={this.state.user} 
-                                        {...this.props}/>
-                                }/>
-                </Switch> 
+                    <Switch>
+                        <Route exact path="/" render={ props => isAuthenticated 
+                                                        ?   <Redirect to="/posts"/>
+                                                        :   <Auth 
+                                                                {...props} 
+                                                                signUp={this.signUp} 
+                                                                login={this.login}
+                                                                authErrCode={this.state.authErrCode}/>}/>
+                        <ProtectedRoute 
+                                    path="/posts" 
+                                    redirectTo="/"
+                                    isAuthenticated={ isAuthenticated } 
+                                    render={() => 
+                                        <PostsPage 
+                                            {...this.props} // Sends the history, match, and location props from react-router-dom
+                                            addPost={this.addPost}
+                                            posts={this.state.posts}
+                                            handleDelete={this.handleDelete}
+                                            formToggler={this.formToggler}
+                                            formToggle={this.state.formToggle}/>} 
+                                    />
+                        <ProtectedRoute 
+                                    path="/profile" 
+                                    isAuthenticated={ isAuthenticated }
+                                    redirectTo="/"
+                                    render={() => 
+                                        <Profile 
+                                            user={this.state.user} 
+                                            {...this.props}/>
+                                    }/>
+                    </Switch> 
                 }
                 <Footer />
             </div>
