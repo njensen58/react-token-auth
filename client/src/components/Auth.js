@@ -19,7 +19,7 @@ class Auth extends Component {
     render(){
         return (
             <div className="auth-page">
-                {this.state.formToggle 
+                { this.state.formToggle 
                     ? <div>
                         <span style={{ backgroundColor: 'cornflowerblue' }}>Login</span>
                         <span>Sign Up</span>
@@ -29,8 +29,8 @@ class Auth extends Component {
                         <span style={{ backgroundColor: 'cornflowerblue' }}>Sign Up</span>     
                       </div>
                 }
-                {!this.state.formToggle ? <span onClick={this.toggle}>-Already a Member?</span> : <span onClick={this.toggle}>-New Member?</span>}
-                {!this.state.formToggle 
+                { !this.state.formToggle ? <span onClick={this.toggle}>-Already a Member?</span> : <span onClick={this.toggle}>-New Member?</span>}
+                { !this.state.formToggle 
                     ? <Form 
                         inputs={{ username: '', password: '' }}
                         submit={inputs => this.props.signUp(inputs)}
